@@ -16,8 +16,8 @@ loaded = load_dotenv(
 #OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 #PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 
-openai_api_key = st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else "default"
-pinecone_api_key = st.secrets["PINECONE_API_KEY"] if "PINECONE_API_KEY" in st.secrets else "default"
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else "default"
+PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"] if "PINECONE_API_KEY" in st.secrets else "default"
 
 
 #if not env_path.exists():

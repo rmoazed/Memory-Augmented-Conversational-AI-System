@@ -9,7 +9,7 @@ import numpy as np
 from schemas import MemoryExtractionResult
 from config import client, index
 from prompt import system_prompt
-from config import open_api_key, pinecone_api_key
+from config import OPENAI_API_KEY, PINECONE_API_KEY
 import streamlit as st
 import openai
 import os
