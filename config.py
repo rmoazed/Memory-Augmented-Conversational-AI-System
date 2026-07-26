@@ -15,15 +15,9 @@ loaded = load_dotenv(
 #OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 #PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 
-openai_api_key = (
-    st.secrets.get("OPENAI_API_KEY")
-    or os.getenv("OPENAI_API_KEY")
-)
+openai_api_key = st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else "default"
+pinecone_api_key = st.secrets["PINECONE_API_KEY"] if "PINECONE_API_KEY" in st.secrets else "default"
 
-pinecone_api_key = openai_api_key = (
-    st.secrets.get("PINECONE_API_KEY")
-    or os.getenv("PINECONE_API_KEY")
-)
 
 #if not env_path.exists():
     #raise FileNotFoundError(f".env file not found at: {env_path}")
