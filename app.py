@@ -2,6 +2,7 @@ import streamlit as st
 from baseline_memory_chatbot import BaselineMemoryChatbot
 from conflict_memory_chatbot import ConflictMemoryChatbot
 from config import client, index
+from config import OPENAI_API_KEY, PINECONE_API_KEY
 from prompt import system_prompt
 import joblib
 import numpy as np
