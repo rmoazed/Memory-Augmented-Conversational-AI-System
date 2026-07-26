@@ -1,0 +1,7 @@
+Model,Passes,Failures,Accuracy
+Semantic Baseline,9,4,0.6923076923076923
+Semantic Conflict,8,5,0.6153846153846154
+SVM Baseline,5,8,0.38461538461538464
+SVM Conflict,6,7,0.46153846153846156
+LLM Baseline,0,13,0.0
+LLM Conflict,0,13,0.0
