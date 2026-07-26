@@ -8,7 +8,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from schemas import MemoryExtractionResult, MemoryRelationshipResult
 from config import client, index
-from prompts import system_prompt
+from prompt import system_prompt
+
 
 class ConflictMemoryChatbot:
 
@@ -32,6 +33,7 @@ class ConflictMemoryChatbot:
         self.messages = [{"role":"system","content":system_prompt}] #message format
         self.embedding_model = embedding_model
         self.chat_model = chat_model
+        self.stored_memories = []
         self.memory_namespace = memory_namespace #added this because need the baseline bot and conflict-aware bot to have
         self.extraction_method = extraction_method
         self.classifier = classifier #trained ml model
@@ -65,6 +67,12 @@ class ConflictMemoryChatbot:
             namespace=self.memory_namespace #rather than have many indicies going to have one index w/ namespaces for
             #simplicities sake
         )
+        self.stored_memories.append({
+        "id": memory_id,
+        "memory_text": memory_text
+    })
+
+    
 
         return memory_id
         
@@ -259,7 +267,17 @@ class ConflictMemoryChatbot:
             ids=[memory_id],
             namespace=self.memory_namespace
         )
+        
+        self.stored_memories = [ #updating stored_memories
+        memory
+        for memory in self.stored_memories
+        if memory["id"] != memory_id
+    ]
 
+    def get_memory_state(self):
+        return [memory["memory_text"] for memory in self.stored_memories] #helper function for eval functions, just 
+        #returns the memory text from stored_memories
+        
     def resolve_memory_relationship(self, relationship_result, metadata): #function for action based on results of 
         #classify_memory_relationship()
         action = relationship_result["action"]
@@ -411,6 +429,31 @@ class ConflictMemoryChatbot:
 
             print(f"Bot: {response_content}")
 
+    def chat_once(self, question): #for evaluation purposes!! added argument question so that can use for evaluation
+        #functions. now can pass dataset through chat
+        self.process_memory(question)
+
+        memories = self.retrieve_memories(question)
+        knowledge_results = self.retrieve_knowledge(question)
+
+        memory_context = "\n".join(memories)
+        knowledge_context = "\n".join(knowledge_results)
+
+        system_message_with_context = f"""
+        {self.system_prompt}
+
+        Relevant long-term memories:
+        {memory_context}
+
+        Relevant knowledge base context:
+        {knowledge_context}
+        """
+
+        self.messages[0]["content"] = system_message_with_context
+
+        response_content = self.generate_response(question)
+
+        return response_content
     def respond_once(self, user_message): #adding b/c in streamlit can't use things like input() or while, etc.
         memory_result = self.process_memory(user_message)
 
@@ -433,7 +476,9 @@ class ConflictMemoryChatbot:
         response_text = self.generate_response(user_message)
 
         return {
-            "response": response_text,
-            "memory_result": memory_result,
-            "retrieved_memories": memories
-            }
+        "response": response_text,
+        "memory_result": memory_result,
+        "retrieved_memories": memories,
+        "extraction_method": self.extraction_method,
+        "memory_namespace": self.memory_namespace
+        }

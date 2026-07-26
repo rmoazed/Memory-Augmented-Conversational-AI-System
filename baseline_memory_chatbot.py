@@ -8,7 +8,19 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from schemas import MemoryExtractionResult
 from config import client, index
-from prompts import system_prompt
+from prompt import system_prompt
+
+
+import openai
+import os
+import json
+import uuid
+import pandas as pd
+from pinecone import Pinecone, ServerlessSpec
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+from typing import Literal
+from pydantic import BaseModel
 
 
 class BaselineMemoryChatbot:
@@ -33,6 +45,7 @@ class BaselineMemoryChatbot:
         self.messages = [{"role":"system","content":system_prompt}] #message format
         self.embedding_model = embedding_model
         self.chat_model = chat_model
+        self.stored_memories = []
         self.memory_namespace = memory_namespace
         self.extraction_method = extraction_method
         self.classifier = classifier #trained ml model
@@ -63,6 +76,11 @@ class BaselineMemoryChatbot:
             namespace=self.memory_namespace #rather than have many indicies going to have one index w/ namespaces for
             #simplicities sake
         )
+
+        self.stored_memories.append({
+            "id": memory_id,
+            "memory_text": memory_text
+            })
 
         return memory_id
         
@@ -193,6 +211,9 @@ class BaselineMemoryChatbot:
         
         return memories 
 
+    def get_memory_state(self): #helper function for eval, just returns memory text in stored_memories
+        return [memory["memory_text"] for memory in self.stored_memories]
+
     #basically doing the same thing as the retrieve_memories function but for the namespace in the pinecone index that has
     #predefined knowledge pre any conversation with user
     def retrieve_knowledge(self, query_text, top_k=None):
@@ -274,6 +295,35 @@ class BaselineMemoryChatbot:
 
             print(f"Bot: {response_content}")
 
+    def chat_once(self, question): #for evaluation purposes!! added argument question so that can use for evaluation
+        #functions. now can pass dataset through chat
+        self.process_memory(question)
+
+        memories = self.retrieve_memories(question)
+        knowledge_results = self.retrieve_knowledge(question)
+
+        memory_context = "\n".join(memories)
+        knowledge_context = "\n".join(knowledge_results)
+
+        system_message_with_context = f"""
+        {self.system_prompt}
+
+        Relevant long-term memories:
+        {memory_context}
+
+        Relevant knowledge base context:
+        {knowledge_context}
+        """
+
+        self.messages[0]["content"] = system_message_with_context
+
+        response_content = self.generate_response(question)
+
+        return response_content
+
+
+
+
     def respond_once(self, user_message): #adding b/c streamlit can't use things like input(), while, etc.
         memory_result = self.process_memory(user_message)
 
@@ -296,9 +346,11 @@ class BaselineMemoryChatbot:
         response_text = self.generate_response(user_message)
 
         return {
-            "response": response_text,
-            "memory_result": memory_result,
-            "retrieved_memories": memories
+        "response": response_text,
+        "memory_result": memory_result,
+        "retrieved_memories": memories,
+        "extraction_method": self.extraction_method,
+        "memory_namespace": self.memory_namespace
         }
 
 
