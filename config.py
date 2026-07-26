@@ -12,20 +12,30 @@ loaded = load_dotenv(
     override=True
 )
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+#OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+#PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 
-if not env_path.exists():
-    raise FileNotFoundError(f".env file not found at: {env_path}")
+openai_api_key = (
+    st.secrets.get("OPENAI_API_KEY")
+    or os.getenv("OPENAI_API_KEY")
+)
 
-if not loaded:
-    raise RuntimeError(f"python-dotenv could not load: {env_path}")
+pinecone_api_key = openai_api_key = (
+    st.secrets.get("PINECONE_API_KEY")
+    or os.getenv("PINECONE_API_KEY")
+)
 
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY is missing from the .env file")
+#if not env_path.exists():
+    #raise FileNotFoundError(f".env file not found at: {env_path}")
 
-if not PINECONE_API_KEY:
-    raise ValueError("PINECONE_API_KEY is missing from the .env file")
+#if not loaded:
+    #raise RuntimeError(f"python-dotenv could not load: {env_path}")
+
+#if not OPENAI_API_KEY:
+    #raise ValueError("OPENAI_API_KEY is missing from the .env file")
+
+#if not PINECONE_API_KEY:
+    #raise ValueError("PINECONE_API_KEY is missing from the .env file")
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
