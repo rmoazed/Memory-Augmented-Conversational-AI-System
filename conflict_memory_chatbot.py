@@ -10,6 +10,8 @@ from schemas import MemoryExtractionResult, MemoryRelationshipResult
 from config import client, index
 from prompt import system_prompt
 from config import openai_api_key, pinecone_api_key
+import streamlit as st
+
 
 
 class ConflictMemoryChatbot:

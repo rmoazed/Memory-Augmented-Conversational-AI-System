@@ -3,6 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 from pinecone import Pinecone
+import streamlit as st
 
 
 env_path = Path(__file__).resolve().parent / ".env"
