@@ -9,7 +9,7 @@ import numpy as np
 from schemas import MemoryExtractionResult
 from config import client, index
 from prompt import system_prompt
-from config import OPENAI_API_KEY, PINECONE_API_KEY
+from config import open_api_key, pinecone_api_key
 
 import openai
 import os
