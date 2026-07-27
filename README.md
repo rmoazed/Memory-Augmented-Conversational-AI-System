@@ -87,15 +87,15 @@ Together, these experiments evaluate how memory extraction and memory management
 The user inputs a message. The chatbot then determines the importance score of the message. There are 5 categories that each correlate with an importance score. They are:
 
 
-. 5 - critical constraints (severe food allergies, crucial medical information, etc.)
+. **5** - critical constraints (severe food allergies, crucial medical information, etc.)
 
-. 4 - stable preference/goal (favorite foods, favorite places, etc.)
+. **4** - stable preference/goal (favorite foods, favorite places, etc.)
 
-. 3 - recurrent context (recurring appointments, schedule related, etc.)
+. **3** - recurrent context (recurring appointments, schedule related, etc.)
 
-. 2 - temporary context (upcoming trip, etc.)
+. **2** - temporary context (upcoming trip, etc.)
 
-. 1 - do not store (e.g. "how are you?")
+. **1** - do not store (e.g. "how are you?")
 
 
 Messages assigned an importance score greater than 1 are embedded using OpenAI's text embedding model (1,536-dimensional vectors) and stored in Pinecone. In future conversations, semantically relevant memories are retrieved from the vector database and incorporated into the GPT's response generation, allowing the chatbot to maintain personalized long-term context. 
