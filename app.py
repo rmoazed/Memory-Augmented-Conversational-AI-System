@@ -1423,6 +1423,9 @@ elif page == "Model Performance": #last page about ML model performance (compari
             }
         )
 
+        comparison_df["Test Accuracy"] *= 100
+
+
         st.subheader("Summary")
 
         st.dataframe(
