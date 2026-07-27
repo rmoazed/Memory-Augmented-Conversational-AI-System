@@ -1438,7 +1438,7 @@ elif page == "Model Performance": #last page about ML model performance (compari
                     "Test Accuracy",
                     min_value=0,
                     max_value=1,
-                    format="%percent"
+                    format="%.1f%%"
                 ),
                 "Incorrect Predictions":
                     st.column_config.NumberColumn(
