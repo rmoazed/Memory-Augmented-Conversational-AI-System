@@ -1,4 +1,4 @@
-# Memory-Extraction-Chatbot
+# Memory Extraction Chatbot
 A modular memory-augmented chatbot framework comparing semantic, supervised machine-learning, and LLM-based memory extraction under baseline and conflict-aware memory management 
 architectures.
 
@@ -13,7 +13,7 @@ architectures.
 # Overview
 
 
-The Memory Extraction Chatbot is an end-to-end conversational AI system that explores how different memory extraction techniques impact user-chatbot interaction and personalization of chatbot response. 
+The Memory Extraction Chatbot is an end-to-end conversational AI system that explores how different memory extraction techniques influence long--term personalization in LLM-powered conversational agents. 
 
 
 Rather than storing every user input message as a memory indiscriminately, the chatbot predicts which user messages are important enough to retain as long-term memory. Three extraction strategies are compared:
@@ -34,9 +34,13 @@ The project also compares two memory architectures:
 .**Conflict-Aware Memory** - detects and updates contradictory memories
 
 
+Together, these experiments evaluate how memory extraction and memory management affect the chatbot's ability to retain accurate long-term user information.
+
 # Key Features
 
 . End-to-end conversational AI pipeline
+
+.Modular object-oriented chatbot framework
 
 . Three memory extraction approaches
 
@@ -57,23 +61,21 @@ The project also compares two memory architectures:
 
 ## Technologies
 
-. Python
-
-. Streamlit
-
 . OpenAI API
 
-. Pinecone
+.Pinecone
+
+. Stramlit
 
 . scikit-learn
-
-. pandas
-
-. NumPy
 
 . sentence-transformers
 
 . Hugging Face Transformers
+
+. pandas
+
+. NumPy
 
 
 # System Architecture
@@ -96,6 +98,8 @@ The user inputs a message. The chatbot then determines the importance score of t
 . 1 - do not store (e.g. "how are you?")
 
 
+Messages assigned an importance score greater than 1 are embedded using OpenAI's text embedding model (1,536-dimensional vectors) and stored in Pinecone. In future conversations, semantically relevant memories are retrieved from the vector database and incorporated into the GPT's response generation, allowing the chatbot to maintain personalized long-term context. 
+
 Once the importance score is determined to be above a 1, the memory is stored. The message gets embedded as a vector of dimension 1,536 (standard for OpenAI embeddings) and stored in Pinecone. This memory is then accessible for the chatbot in formulating future responses (GPT response generation) if a user references something related to their previous message. 
 
 
@@ -104,19 +108,18 @@ Once the importance score is determined to be above a 1, the memory is stored. T
 
 ## Semantic Similarity
 
-User input gets embedded as vector, cosine similarity is used to determine top k most similar examples in the dataset (containing 200 examples of each category), the importance scores of those top k data points are weighted, and the weighted importance score is used as the importance score for the user input message. If the weighted importance score is above a 1, the memory gets stored in Pinecone. 
+User input gets embedded into vector space using OpenAI embeddings. Cosine similarity is used to retrieve top-k most similar labeled examples in the training dataset (containing 200 examples of each category), the importance scores of those top k-data points are weighted based on similarity score, and the weighted importance score is used as the predicted importance score for the user input message. If the weighted importance score is above a 1, the memory gets stored in Pinecone. 
 
 
 ## SVM
 
 
-SVM model trained on training dataset to predict importance score of user input message (training data examples are labeled with importance score). Supervised machine learning method.
+SVM model is trained on training dataset to predict importance score of user input message (training data examples are labeled with importance score). Supervised machine learning approach serves as traditional machine learning baseline for comparison against semantic similarity and LLM-based extraction.
 
 
 ## LLM
 
-Prompt-based extraction. The chatbot is given a strict, clear prompt on how to categorize user messages and then instructed to output a JSON. This is what gets upserted to Pinecone. 
-
+GPT is prompted with structured set of extraction instructions describing each importance category. The model returns a JSON object containing the predicted importance score and extracted memory, allowing the chatbot to convert unstructured conversation into structured long-term memory to be upserted to Pinecone. 
 
 # Conflict Handling
 
