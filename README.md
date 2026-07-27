@@ -8,7 +8,8 @@ architectures.
 
 
 [Explore Interactive App Here](https://memory-extraction-chatbot-kgvrscdlmwj9lrh6e9sjtc.streamlit.app/)
-![App Screenshot]("images/streamlit_screenshot_eval.png")
+
+![App Screenshot](images/streamlit_screenshot_eval.png)
 
 # Overview
 
