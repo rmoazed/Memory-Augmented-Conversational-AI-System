@@ -20,7 +20,9 @@ Rather than storing every user input message as a memory indiscriminately, the c
 
 
 . Semantic Similarity
+
 . Support Vector Machine (SVM)
+
 . Large Language Model (LLM)
 
 
@@ -28,47 +30,69 @@ The project also compares two memory architectures:
 
 
 .**Baseline Memory** - appends new memories without discretion beyond importance score
+
 .**Conflict-Aware Memory** - detects and updates contradictory memories
 
 
 # Key Features
 
 . End-to-end conversational AI pipeline
+
 . Three memory extraction approaches
+
 . Conflict-aware memory updates
+
 . Vector database retrieval through Pinecone
+
 . OpenAI GPT integration
+
 . Interactive Streamlit dashboard
+
 . Memory replay visualization
+
 . User-chatbot interaction interface
+
 . Quantitative evaluation of memory state and retrieval accuracy
 
 
 ## Technologies
 
 . Python
+
 . Streamlit
+
 . OpenAI API
+
 . Pinecone
+
 . scikit-learn
+
 . pandas
+
 . NumPy
+
 . sentence-transformers
+
 . Hugging Face Transformers
 
 
 # System Architecture
 
-![Chatbot Architecture](images/chatbot_architecture.png)
+
+<img src="images/chatbot_architecture.png" width="150">
 
 
 The user inputs a message. The chatbot then determines the importance score of the message. There are 5 categories that each correlate with an importance score. They are:
 
 
 . 5 - critical constraints (severe food allergies, crucial medical information, etc.)
+
 . 4 - stable preference/goal (favorite foods, favorite places, etc.)
+
 . 3 - recurrent context (recurring appointments, schedule related, etc.)
+
 . 2 - temporary context (upcoming trip, etc.)
+
 . 1 - do not store (e.g. "how are you?")
 
 
@@ -113,9 +137,15 @@ Prompt-based extraction. The chatbot is given a strict, clear prompt on how to c
 
 
 . BERTScore evaluation
+
 . Human Evaluation
+
 . Hybrid memory extraction
+
 . Larger datasets
+
 . Fine-tuned classifier
+
 . Multi-session memory
+
 . Memory expiration
