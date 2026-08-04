@@ -140,6 +140,12 @@ In the conflict-aware chatbot architecture, when a user inputs a message, which 
 
 Once the LLM classifies the related memory, one of the following happens. If it is compatible or unrelated to the incoming message, the incoming message gets stored to the database. If it is a duplicate memory, the incoming message does not get stored. And most importantly, if it is a conflict memory, the conflicting related memory gets deleted from Pinecone and replaced with the new one. So, in practice, "my favorite color is red" will be deleted and replaced by "my favorite color is red." This is done with the intention of increasing the quality of the chatbot response when asked about a topic where the user has at some point or other in the chat input information that conflicts with information input prior. 
 
+Below is a diagram highlighting the pipeline of the conflict-aware architecture. 
+
+
+<img src="images/conflict_aware_flowchart.png" width="150">
+
+
 
 # Evaluation 
 
