@@ -124,7 +124,27 @@ GPT is prompted with structured set of extraction instructions describing each i
 # Conflict Handling
 
 
+Part of this project is dedicated to the handling of conflicting memories. For example, if a user inputs that their favorite color is red, that message will likely be labeled as importance score 4 (stable preference/goal) and upserted to Pinecone as a vector and future memory to reference in conversation. If in the same conversation the user later inputs that their favorite color is blue, in the baseline model of the chatbot, that message will also get stored in the vector database. The issue then becomes, however, how should the chatbot handle the question "what is my favorite color" when asked by the user. In the baseline model, it is likely that the chatbot will reference both colors when asked the question. The conflict-aware chatbot model, however, handles the problem differently. 
+
+
+In the conflict-aware chatbot architecture, when a user inputs a message, which then gets embedded as a vector, before the chatbot assigns the message an importance score, it first retrieves the top-k most similar messages already stored in Pinecone. Once those related memories are retrieved, the LLM is given a very strict rubric to classify the memory as either:
+
+. Compatible - poses no conflict to the incoming message
+
+. Unrelated - poses no conflict to the incoming message
+
+. Duplicate - same semantic meaning as the incoming message
+
+. Conflict - at odds with incoming message (i.e. red v. blue)
+
+
+Once the LLM classifies the related memory, one of the following happens. If it is compatible or unrelated to the incoming message, the incoming message gets stored to the database. If it is a duplicate memory, the incoming message does not get stored. And most importantly, if it is a conflict memory, the conflicting related memory gets deleted from Pinecone and replaced with the new one. So, in practice, "my favorite color is red" will be deleted and replaced by "my favorite color is red." This is done with the intention of increasing the quality of the chatbot response when asked about a topic where the user has at some point or other in the chat input information that conflicts with information input prior. 
+
+
 # Evaluation 
+
+
+
 
 
 # Streamlit Application
