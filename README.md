@@ -143,8 +143,7 @@ Once the LLM classifies the related memory, one of the following happens. If it 
 Below is a diagram highlighting the pipeline of the conflict-aware architecture. 
 
 
-<img src="images/conflict_aware_flowchart.png" width="150">
-
+![Conflict-aware Architecture](images/conflict_aware_flowchart.png)
 
 
 # Evaluation 
