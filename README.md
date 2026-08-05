@@ -13,7 +13,7 @@ architectures.
 ![App Photo](images/app_photo_1.png)
 
 
-![App Photo](app_photo_2/screenshot.png)
+![App Photo](images/app_photo_2.png)
 
 
 # Overview
