@@ -10,10 +10,14 @@ architectures.
 [Explore Interactive App Here](https://memory-extraction-chatbot-kgvrscdlmwj9lrh6e9sjtc.streamlit.app/)
 
 
-<img src="images/app_photo_1.png" width="550">
+<p align="center">
+  <img src="images/app_photo_1.png" width="700">
+</p>
 
 
-<img src="images/app_photo_2.png" width="550">
+<p align="center">
+  <img src="images/app_photo_2.png" width="700">
+</p>
 
 
 # Overview
@@ -87,8 +91,9 @@ Together, these experiments evaluate how memory extraction and memory management
 # System Architecture
 
 
-<img src="images/chatbot_architecture.png" width="150">
-
+<p align="center">
+  <img src="images/chatbot_architecture.png" width="300">
+</p>
 
 The user inputs a message. The chatbot then determines the importance score of the message. There are 5 categories that each correlate with an importance score. They are:
 
@@ -160,11 +165,14 @@ It was found that for memory-state accuracy, the SVM conflict-aware bot surpasse
 
 For retrieval accuracy, for the semantic and LLM models, the conflict-aware versions increased accuracy from baseline from 60.0% to 80.0%. For the SVM model, accuracy for both the baseline and conflict-aware architectures was 80%, indicating the SVM model as a strong performer by way of retrieval. 
 
-<img src="images/app_memory.png" width="550">
+<p align="center">
+  <img src="images/app_memory_1.png" width="700">
+</p>
 
 
-<img src="images/app_photo_retrieval.png" width="550">
-
+<p align="center">
+  <img src="images/app_photo_retrieval.png" width="700">
+</p>
 
 # Streamlit Application
 
