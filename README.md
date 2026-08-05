@@ -166,7 +166,6 @@ This project includes an interactive application where users may interact with t
 
 ## Repository Structure
 
-```text
 Memory-Extraction-Chatbot/
 │
 ├── app.py
@@ -204,7 +203,6 @@ Memory-Extraction-Chatbot/
 │
 └── images/
     Figures and screenshots used in the README.
-'''
 
 # Running Locally
 
