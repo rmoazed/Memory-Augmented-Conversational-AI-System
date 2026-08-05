@@ -285,6 +285,6 @@ http://localhost:8501
 
 - Fine-tuned classifier
 
-. Multi-session memory
+- Multi-session memory
 
-. Memory expiration
+- Memory expiration
