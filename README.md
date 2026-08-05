@@ -166,6 +166,7 @@ This project includes an interactive application where users may interact with t
 
 ## Repository Structure
 
+'''text
 Memory-Extraction-Chatbot/
 │
 ├── app.py
@@ -203,9 +204,50 @@ Memory-Extraction-Chatbot/
 │
 └── images/
     Figures and screenshots used in the README.
+'''
 
-# Running Locally
 
+## Running Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/YOUR-USERNAME/Memory-Extraction-Chatbot.git
+cd Memory-Extraction-Chatbot
+```
+
+### 2. Install dependencies
+
+Install all required Python packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configure API Keys
+
+Create a `.env` file in the project root containing your API credentials:
+
+```text
+OPENAI_API_KEY=your_openai_api_key
+PINECONE_API_KEY=your_pinecone_api_key
+```
+
+The application will automatically load these environment variables at runtime.
+
+### 4. Launch the application
+
+Start the Streamlit application:
+
+```bash
+streamlit run app.py
+```
+
+The application will open automatically in your default web browser. If it does not, navigate to:
+
+```
+http://localhost:8501
+```
 
 # Future Improvements
 
