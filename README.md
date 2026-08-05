@@ -160,6 +160,10 @@ It was found that for memory-state accuracy, the SVM conflict-aware bot surpasse
 
 For retrieval accuracy, for the semantic and LLM models, the conflict-aware versions increased accuracy from baseline from 60.0% to 80.0%. For the SVM model, accuracy for both the baseline and conflict-aware architectures was 80%, indicating the SVM model as a strong performer by way of retrieval. 
 
+<img src="images/app_photo_memory.png" width="550">
+
+<img src="images/app_photo_retrieval.png" width="550">
+
 
 # Streamlit Application
 
