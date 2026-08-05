@@ -7,7 +7,11 @@ architectures.
 # App Demo
 
 
-[Explore Interactive App Here](https://memory-extraction-chatbot-kgvrscdlmwj9lrh6e9sjtc.streamlit.app/)
+<p align="center">
+  <a href="https://memory-extraction-chatbot-kgvrscdlmwj9lrh6e9sjtc.streamlit.app">
+    Explore the Interactive App Here
+  </a>
+</p>
 
 
 <p align="center">
@@ -92,7 +96,7 @@ Together, these experiments evaluate how memory extraction and memory management
 
 
 <p align="center">
-  <img src="images/chatbot_architecture.png" width="300">
+  <img src="images/chatbot_architecture.png" width="150">
 </p>
 
 The user inputs a message. The chatbot then determines the importance score of the message. There are 5 categories that each correlate with an importance score. They are:
@@ -149,7 +153,7 @@ In the conflict-aware chatbot architecture, when a user inputs a message, which 
 - **Conflict** - at odds with incoming message (i.e. red v. blue)
 
 
-Once the LLM classifies the related memory, one of the following happens. If it is compatible or unrelated to the incoming message, the incoming message gets stored to the database. If it is a duplicate memory, the incoming message does not get stored. And most importantly, if it is a conflict memory, the conflicting related memory gets deleted from Pinecone and replaced with the new one. So, in practice, "my favorite color is red" will be deleted and replaced by "my favorite color is red." This is done with the intention of increasing the quality of the chatbot response when asked about a topic where the user has at some point or other in the chat input information that conflicts with information input prior. 
+Once the LLM classifies the related memory, one of the following happens. If it is compatible or unrelated to the incoming message, the incoming message gets stored to the database. If it is a duplicate memory, the incoming message does not get stored. And most importantly, if it is a conflict memory, the conflicting related memory gets deleted from Pinecone and replaced with the new one. So, in practice, "my favorite color is red" will be deleted and replaced by "my favorite color is blue." This is done with the intention of increasing the quality of the chatbot response when asked about a topic where the user has at some point or other in the chat input information that conflicts with information input prior. 
 
 Below is a diagram highlighting the pipeline of the conflict-aware architecture. 
 
@@ -166,7 +170,7 @@ It was found that for memory-state accuracy, the SVM conflict-aware bot surpasse
 For retrieval accuracy, for the semantic and LLM models, the conflict-aware versions increased accuracy from baseline from 60.0% to 80.0%. For the SVM model, accuracy for both the baseline and conflict-aware architectures was 80%, indicating the SVM model as a strong performer by way of retrieval. 
 
 <p align="center">
-  <img src="images/app_memory_1.png" width="700">
+  <img src="images/app_memory.png" width="700">
 </p>
 
 
