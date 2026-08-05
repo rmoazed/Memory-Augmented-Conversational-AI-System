@@ -25,11 +25,11 @@ The Memory Extraction Chatbot is an end-to-end conversational AI system that exp
 Rather than storing every user input message as a memory indiscriminately, the chatbot predicts which user messages are important enough to retain as long-term memory. Three extraction strategies are compared:
 
 
-. Semantic Similarity
+- Semantic Similarity
 
-. Support Vector Machine (SVM)
+- Support Vector Machine (SVM)
 
-. Large Language Model (LLM)
+- Large Language Model (LLM)
 
 
 The project also compares two memory architectures:
@@ -44,44 +44,44 @@ Together, these experiments evaluate how memory extraction and memory management
 
 # Key Features
 
-. End-to-end conversational AI pipeline
+- End-to-end conversational AI pipeline
 
-.Modular object-oriented chatbot framework
+- Modular object-oriented chatbot framework
 
-. Three memory extraction approaches
+- Three memory extraction approaches
 
-. Conflict-aware memory updates
+- Conflict-aware memory updates
 
-. Vector database retrieval through Pinecone
+- Vector database retrieval through Pinecone
 
-. OpenAI GPT integration
+- OpenAI GPT integration
 
-. Interactive Streamlit dashboard
+- Interactive Streamlit dashboard
 
-. Memory replay visualization
+- Memory replay visualization
 
-. User-chatbot interaction interface
+- User-chatbot interaction interface
 
-. Quantitative evaluation of memory state and retrieval accuracy
+- Quantitative evaluation of memory state and retrieval accuracy
 
 
 ## Technologies
 
-. OpenAI API
+- OpenAI API
 
-.Pinecone
+- Pinecone
 
-. Stramlit
+- Streamlit
 
-. scikit-learn
+- scikit-learn
 
-. sentence-transformers
+- sentence-transformers
 
-. Hugging Face Transformers
+- Hugging Face Transformers
 
-. pandas
+- pandas
 
-. NumPy
+- NumPy
 
 
 # System Architecture
@@ -93,15 +93,15 @@ Together, these experiments evaluate how memory extraction and memory management
 The user inputs a message. The chatbot then determines the importance score of the message. There are 5 categories that each correlate with an importance score. They are:
 
 
-. **5** - critical constraints (severe food allergies, crucial medical information, etc.)
+- **5** - critical constraints (severe food allergies, crucial medical information, etc.)
 
-. **4** - stable preference/goal (favorite foods, favorite places, etc.)
+- **4** - stable preference/goal (favorite foods, favorite places, etc.)
 
-. **3** - recurrent context (recurring appointments, schedule related, etc.)
+- **3** - recurrent context (recurring appointments, schedule related, etc.)
 
-. **2** - temporary context (upcoming trip, etc.)
+- **2** - temporary context (upcoming trip, etc.)
 
-. **1** - do not store (e.g. "how are you?")
+- **1** - do not store (e.g. "how are you?")
 
 
 Messages assigned an importance score greater than 1 are embedded using OpenAI's text embedding model (1,536-dimensional vectors) and stored in Pinecone. In future conversations, semantically relevant memories are retrieved from the vector database and incorporated into the GPT's response generation, allowing the chatbot to maintain personalized long-term context. 
@@ -135,13 +135,13 @@ Part of this project is dedicated to the handling of conflicting memories. For e
 
 In the conflict-aware chatbot architecture, when a user inputs a message, which then gets embedded as a vector, before the chatbot assigns the message an importance score, it first retrieves the top-k most similar messages already stored in Pinecone. Once those related memories are retrieved, the LLM is given a very strict rubric to classify the memory as either:
 
-. **Compatible** - poses no conflict to the incoming message
+- **Compatible** - poses no conflict to the incoming message
 
-. **Unrelated** - poses no conflict to the incoming message
+- **Unrelated** - poses no conflict to the incoming message
 
-. **Duplicate** - same semantic meaning as the incoming message
+- **Duplicate** - same semantic meaning as the incoming message
 
-. **Conflict** - at odds with incoming message (i.e. red v. blue)
+- **Conflict** - at odds with incoming message (i.e. red v. blue)
 
 
 Once the LLM classifies the related memory, one of the following happens. If it is compatible or unrelated to the incoming message, the incoming message gets stored to the database. If it is a duplicate memory, the incoming message does not get stored. And most importantly, if it is a conflict memory, the conflicting related memory gets deleted from Pinecone and replaced with the new one. So, in practice, "my favorite color is red" will be deleted and replaced by "my favorite color is red." This is done with the intention of increasing the quality of the chatbot response when asked about a topic where the user has at some point or other in the chat input information that conflicts with information input prior. 
@@ -263,15 +263,15 @@ http://localhost:8501
 # Future Improvements
 
 
-. BERTScore evaluation
+- BERTScore evaluation
 
-. Human Evaluation
+- Human Evaluation
 
-. Hybrid memory extraction
+- Hybrid memory extraction
 
-. Larger datasets
+- Larger datasets
 
-. Fine-tuned classifier
+- Fine-tuned classifier
 
 . Multi-session memory
 
