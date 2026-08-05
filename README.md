@@ -129,13 +129,13 @@ Part of this project is dedicated to the handling of conflicting memories. For e
 
 In the conflict-aware chatbot architecture, when a user inputs a message, which then gets embedded as a vector, before the chatbot assigns the message an importance score, it first retrieves the top-k most similar messages already stored in Pinecone. Once those related memories are retrieved, the LLM is given a very strict rubric to classify the memory as either:
 
-. Compatible - poses no conflict to the incoming message
+. **Compatible** - poses no conflict to the incoming message
 
-. Unrelated - poses no conflict to the incoming message
+. **Unrelated** - poses no conflict to the incoming message
 
-. Duplicate - same semantic meaning as the incoming message
+. **Duplicate** - same semantic meaning as the incoming message
 
-. Conflict - at odds with incoming message (i.e. red v. blue)
+. **Conflict** - at odds with incoming message (i.e. red v. blue)
 
 
 Once the LLM classifies the related memory, one of the following happens. If it is compatible or unrelated to the incoming message, the incoming message gets stored to the database. If it is a duplicate memory, the incoming message does not get stored. And most importantly, if it is a conflict memory, the conflicting related memory gets deleted from Pinecone and replaced with the new one. So, in practice, "my favorite color is red" will be deleted and replaced by "my favorite color is red." This is done with the intention of increasing the quality of the chatbot response when asked about a topic where the user has at some point or other in the chat input information that conflicts with information input prior. 
@@ -149,10 +149,22 @@ Below is a diagram highlighting the pipeline of the conflict-aware architecture.
 # Evaluation 
 
 
+The chatbots were evaluated under two primary metrics: memory-state accuracy and retrieval accuracy. Memory-state accuracy refers to whether the memory extracted by the chatbot when given a message matches the expected extracted memory. Retrieval accuracy assesses whether the chatbot response contains the appropriate information and excludes any outdated information. These accuracies were evaluated based on the presence of required keywords and absence of defined forbidden words. 
 
+
+It was found that for memory-state accuracy, the SVM conflict-aware bot surpassed the SVM baseline bot with 46.2% accuracy versus 38.5% accuracy. The semantic-similarity baseline model interestingly outperformed the conflict-aware model with an accuracy of 69.2% as opposed to 61.5%. For the LLM models, it proved that the typical method of evaluation using keywords was not applicable, as the LLM often converted a message from the user such as "I am happy" to "the user is happy" when storing. A project improvement would include developing a tailored method for evaluating LLM memory-state accuracy.
+
+
+For retrieval accuracy, for the semantic and LLM models, the conflict-aware versions increased accuracy from baseline from 60.0% to 80.0%. For the SVM model, accuracy for both the baseline and conflict-aware architectures was 80%, indicating the SVM model as a strong performer by way of retrieval. 
 
 
 # Streamlit Application
+
+
+This project includes an interactive application where users may interact with the chatbot and view memory-processing details for each message input, can use an interactive retrieval demo, and can view all evaluation metrics. A link to the application is included below. 
+
+
+[Explore Interactive App Here](https://memory-extraction-chatbot-kgvrscdlmwj9lrh6e9sjtc.streamlit.app/)
 
 
 # Repository Structure
