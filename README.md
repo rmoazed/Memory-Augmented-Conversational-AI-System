@@ -96,7 +96,7 @@ Together, these experiments evaluate how memory extraction and memory management
 
 
 <p align="center">
-  <img src="images/chatbot_architecture.png" width="150">
+  <img src="images/chatbot_architecture.png" width="200">
 </p>
 
 The user inputs a message. The chatbot then determines the importance score of the message. There are 5 categories that each correlate with an importance score. They are:
