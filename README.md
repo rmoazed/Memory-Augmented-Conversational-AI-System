@@ -204,7 +204,7 @@ Memory-Extraction-Chatbot/
 │
 └── images/
     Figures and screenshots used in the README.
-```text
+```
 
 
 ## Running Locally
