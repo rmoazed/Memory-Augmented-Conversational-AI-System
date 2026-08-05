@@ -10,6 +10,12 @@ architectures.
 [Explore Interactive App Here](https://memory-extraction-chatbot-kgvrscdlmwj9lrh6e9sjtc.streamlit.app/)
 
 
+![App Photo](images/app_photo_1.png)
+
+
+![App Photo](app_photo_2/screenshot.png)
+
+
 # Overview
 
 
