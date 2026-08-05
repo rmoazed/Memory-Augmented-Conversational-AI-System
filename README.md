@@ -164,8 +164,46 @@ This project includes an interactive application where users may interact with t
 [Explore Interactive App Here](https://memory-extraction-chatbot-kgvrscdlmwj9lrh6e9sjtc.streamlit.app/)
 
 
-# Repository Structure
+## Repository Structure
 
+```text
+Memory-Extraction-Chatbot/
+│
+├── app.py
+│   Streamlit application and user interface.
+│
+├── baseline_memory_chatbot.py
+│   Baseline memory architecture.
+│
+├── conflict_memory_chatbot.py
+│   Conflict-aware memory architecture.
+│
+├── evaluation_functions.py
+│   Evaluation utilities and retrieval pipeline.
+│
+├── evaluation_datasets.py
+│   Benchmark conversations and evaluation data.
+│
+├── evaluation_results.py
+│   Scripts for generating evaluation metrics.
+│
+├── config.py
+│   API configuration and environment variables.
+│
+├── prompt.py
+│   System prompts used by the chatbot.
+│
+├── schemas.py
+│   Structured JSON schemas for memory extraction.
+│
+├── data/
+│   Training, validation, testing, and benchmark datasets.
+│
+├── models/
+│   Trained machine learning classifiers.
+│
+└── images/
+    Figures and screenshots used in the README.
 
 # Running Locally
 
